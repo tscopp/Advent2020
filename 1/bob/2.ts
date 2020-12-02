@@ -8,23 +8,26 @@ const data = [1934,1702,1571,1737,1977,1531,1428,1695,1794,1101,13,1164,1235,128
 function expensify(target: number, data: number[], numValues: number, startIndex = 0): number | void {
     if (numValues < 2) return;
 
-    // Only used when numValues is 2
-    let lookup: { [key: number]: boolean } = {};
-    
-    for (let i = startIndex; i < data.length; i++) {
-        const value = data[i];
-        const needle = target - value;
-        if (numValues > 2) {
+    if (numValues === 2) {
+        let lookup: { [key: number]: boolean } = {};
+        for (let i = startIndex; i < data.length; i++) {
+            const value = data[i];
+            const needle = target - value;
+
+            if (lookup[needle]) return value * needle;
+            lookup[value] = true;
+        }
+    } else {
+        for (let i = startIndex; i < data.length; i++) {
+            const value = data[i];
+            const needle = target - value;
             const product = expensify(
                 needle,
-                data,
+                data, // prevent number from being used twice
                 numValues - 1,
                 i + 1,
             );
             if (product != null) return product * value;
-        } else {
-            if (lookup[needle]) return value * needle;
-            lookup[value] = true;
         }
     }
 }
