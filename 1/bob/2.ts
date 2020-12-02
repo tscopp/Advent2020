@@ -6,7 +6,7 @@ const data = [1934,1702,1571,1737,1977,1531,1428,1695,1794,1101,13,1164,1235,128
     2004,1044,1191,1014,1857,1813,1572,1055,1002,1721,1273,1417,1968,1888,1863,1278,1141,1964,1259,1823,1181,1779,0];
 
 function expensify(target: number, data: number[], numValues: number, startIndex = 0): number | void {
-    if (numValues < 2) return;
+    if (numValues < 2 || data.length < numValues) return;
 
     if (numValues === 2) {
         let lookup: { [key: number]: boolean } = {};
