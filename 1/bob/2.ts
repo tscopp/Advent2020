@@ -17,7 +17,7 @@ function expensify(target: number, data: number[], numValues: number, startIndex
         if (numValues > 2) {
             const product = expensify(
                 needle,
-                data, // prevent number from being used twice
+                data,
                 numValues - 1,
                 i + 1,
             );
